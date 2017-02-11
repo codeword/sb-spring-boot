@@ -1,0 +1,33 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }z
+  dependencies {
+    classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+jar {
+  baseName = 'gs-spring-boot'
+  version = '0.1.0'
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+  compile 'org.springframework.boot:spring-boot-starter-web',
+    'org.springframework.boot:spring-boot-starter-actuator'
+  testCompile 'junit:junit'
+}
+
+task getHomeDir << {
+  println gradle.gradleHomeDir
+}
