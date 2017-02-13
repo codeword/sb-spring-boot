@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Spring Security Example</title>
+</head>
+<body>
+  <div th:fragment="session">
+    <div th:if="${#ctx == null}">No #ctx</div>
+    <div th:unless="${#ctx == null}" th:text="${#ctx}">No #ctx</div>
+    <table th:unless="${#ctx == null || true}">
+      <tr> <th colspan="2">#ctx</th> </tr>
+      <tr> <th>Key</th> <th>Value</th> </tr>
+      <tr th:each="attr : ${#ctx.getVariableNames()}">
+        <td th:text="${attr}"></td>
+        <td th:text="${#ctx.getVariable(attr)}"></td>
+      </tr>
+    </table>
+    <div th:if="${session == null}">No Session</div>
+    <table th:unless="${session == null}">
+      <tr> <th colspan="2">session</th> </tr>
+      <tr> <th>Key</th> <th>Value</th> </tr>
+      <tr th:each="attr : ${session.keySet()}">
+        <td th:text="${attr}"></td>
+        <td th:text="${session.get(attr)}"></td>
+      </tr>
+    </table>
+    <div th:if="${#servletContext == null}">No #servletContext</div>
+    <table th:unless="${#servletContext == null}">
+      <tr> <th colspan="2">servletContext</th> </tr>
+      <tr> <th>Key</th> <th>Value</th> </tr>
+      <tr th:each="attr : ${#servletContext.keySet()}">
+        <td th:text="${attr}">javax.servlet.context.tempdir</td>
+        <td th:text="${#servletContext.get(attr)}">/tmp</td>
+      </tr>
+    </table>
+  </div>
+  <h1>Welcome!</h1>
+  <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+</body>
+</html>

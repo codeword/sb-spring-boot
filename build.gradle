@@ -1,33 +1,39 @@
 buildscript {
-  repositories {
-    mavenCentral()
-  }z
-  dependencies {
-    classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
-  }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 
 jar {
-  baseName = 'gs-spring-boot'
-  version = '0.1.0'
+    baseName = 'gs-spring-boot'
+    version = '0.1.0'
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-  compile 'org.springframework.boot:spring-boot-starter-web',
-    'org.springframework.boot:spring-boot-starter-actuator'
-  testCompile 'junit:junit'
+    compile 'org.springframework.boot:spring-boot-devtools',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-starter-security'
+    testCompile 'junit:junit',
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.springframework.security:spring-security-test'
 }
 
 task getHomeDir << {
-  println gradle.gradleHomeDir
+    println gradle.gradleHomeDir
 }
